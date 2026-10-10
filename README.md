@@ -1,8 +1,17 @@
-# WeChat Message Helper
+<!-- Project artwork created for this repository. -->
+<p align="center">
+  <img src="./docs/assets/readme-banner.svg" width="100%" alt="WeChat Message Helper — Configured template messages, kept simple." />
+</p>
+
+<h1 align="center">WeChat Message Helper</h1>
+
+<p align="center">
+  <img src="./docs/assets/readme-badges.svg" alt="Legacy script · Python · WeChat API" />
+</p>
 
 **A small Python script for sending a configured WeChat template message.**
 
-`Python` · `WeChat API` · `Legacy script`
+<p align="center"><a href="#what-it-sends">What it sends</a> &nbsp; · &nbsp; <a href="#before-running">Before running</a> &nbsp; · &nbsp; <a href="#limitations">Limitations</a></p>
 
 ## What it sends
 

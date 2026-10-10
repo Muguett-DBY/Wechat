@@ -6,6 +6,7 @@ from datetime import datetime, date
 from zhdate import ZhDate
 import sys
 import os
+from parsing import load_config, parse_weather_response
 
 
 def get_color():
@@ -51,8 +52,7 @@ def get_weather(province, city):
     url = "http://d1.weather.com.cn/dingzhi/{}.html?_={}".format(city_id, t)
     response = get(url, headers=headers)
     response.encoding = "utf-8"
-    response_data = response.text.split(";")[0].split("=")[-1]
-    response_json = eval(response_data)
+    response_json = parse_weather_response(response.text)
     # print(response_json)
     weatherinfo = response_json["weatherinfo"]
     # 天气
@@ -200,13 +200,12 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
 
 if __name__ == "__main__":
     try:
-        with open("config.txt", encoding="utf-8") as f:
-            config = eval(f.read())
+        config = load_config()
     except FileNotFoundError:
         print("推送消息失败，请检查config.txt文件是否与程序位于同一路径")
         os.system("pause")
         sys.exit(1)
-    except SyntaxError:
+    except (SyntaxError, ValueError):
         print("推送消息失败，请检查配置文件格式是否正确")
         os.system("pause")
         sys.exit(1)

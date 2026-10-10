@@ -10,7 +10,7 @@ Weather, an anniversary day count, birthday reminders, and a daily quote to the 
 
 ## Before running
 
-You need a compatible WeChat account/template and your own app credentials, template ID, and recipient IDs. The script reads `config.txt` from the current working directory.
+You need a compatible WeChat account/template and your own app credentials, template ID, and recipient IDs. Copy `config.example.json` to `config.txt` and fill in your own values. `config.txt` is ignored by Git. Alternatively, provide the entire JSON configuration in the `WECHAT_CONFIG_JSON` environment variable; it takes precedence over the file.
 
 | Setting | Purpose |
 | --- | --- |
@@ -28,6 +28,10 @@ After reviewing the configuration and recipients, `python main.py` sends the mes
 
 ## Limitations
 
-This is a legacy implementation with pinned dependencies and external weather/quote services. It uses `eval()` for configuration and a weather response; replace that parsing before treating it as a reusable service. Do not commit real credentials or recipient information in `config.txt`.
+This is a legacy implementation with pinned dependencies and external weather/quote services. Configuration accepts JSON or the original Python literal format without executing code. Weather responses are decoded as JSON. Do not commit real credentials or recipient information.
+
+The sending workflow is opt-in: set the repository secret `WECHAT_CONFIG_JSON` and the Actions variable `WECHAT_SEND_ENABLED=true` only when you intend to send messages on its schedule. Pushes run parser tests only. Test safely with `python -m unittest discover -s tests`; those tests make no network requests and send no messages.
+
+If credentials were previously committed, removing the current file does not erase Git history. Replace those credentials with fresh ones before enabling delivery.
 
 `main.py` contains the sending flow; `cityinfo.py` contains the weather-location lookup.

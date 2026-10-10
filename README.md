@@ -44,3 +44,5 @@ The sending workflow is opt-in: set the repository secret `WECHAT_CONFIG_JSON` a
 If credentials were previously committed, removing the current file does not erase Git history. Replace those credentials with fresh ones before enabling delivery.
 
 `main.py` contains the sending flow; `cityinfo.py` contains the weather-location lookup.
+
+Original code is available for noncommercial use under [PolyForm Noncommercial 1.0.0](LICENSE). See [license scope and third-party assets](docs/LICENSE_SCOPE.md).
